@@ -29,6 +29,12 @@ class User(db.Model):
         self.username = username
         self.password = password
 
+@app.before_request
+def require_login():
+    allowed_routes = ['main', 'login']
+    if request.endpoint not in allowed_routes and 'username' not in session:
+        return redirect('/login')
+
 @app.route('/signup', methods=['GET','POST'])
 def newSignUp():
     if request.method == 'POST':
@@ -60,14 +66,44 @@ def newSignUp():
 
     return render_template('signup.html')
 
+@app.route('/login', methods=['POST','GET'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        user = User.query.filter_by(username=username).first()
+
+        if user and user.password == password:
+            session['username'] = username
+            return redirect('/newpost')
+        elif user and user.password != password:
+            flash('Password incorrect')
+            return render_template('login.html', username=username)
+        elif username == '' or password == '':
+            flash('Either username or password left blink')
+            return render_template('login.html')
+        else:
+            flash('Username does not exist')
+            return render_template('login.html')
+
+    return render_template('login.html')
+
+@app.route('/main')
+def index():
+    return render_template('/index.html')
 
 @app.route('/blog', methods=['POST' , 'GET'])
 def blog():
     error_title = ''
     error_text = ''
+
+
     if request.method == 'POST':
         blog_title = request.form['blog_title']
         blog_text = request.form['blog_text']
+
+        owner = User.query.filter_by(username=session['username']).first()
 
         if blog_title == '':
             error_title = " no title"
@@ -78,7 +114,7 @@ def blog():
             return render_template("newpost.html", error_text = error_text , blog_title = blog_title)
         else:
 
-            blog_entry = Blog(blog_title,blog_text)
+            blog_entry = Blog(blog_title,blog_text, owner)
             db.session.add(blog_entry)
             db.session.commit()
             list_tmp = Blog.query.all()
@@ -97,6 +133,11 @@ def newpage():
 @app.route('/newpost')
 def entry():
     return render_template("newpost.html")
+
+@app.route('/logout')
+def logout():
+    del session['username']
+    return redirect("/blog")
 
 
 if __name__ == '__main__':
