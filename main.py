@@ -29,11 +29,18 @@ class User(db.Model):
         self.username = username
         self.password = password
 
-@app.before_request
-def require_login():
-    allowed_routes = ['main', 'login']
-    if request.endpoint not in allowed_routes and 'username' not in session:
-        return redirect('/login')
+@app.route('/blogger', methods=['GET', 'POST'])
+def blogger():
+    name = request.args.get('user')
+    user_name = User.query.filter_by(username = name).all()
+    
+    return render_template('blogger.html', user_name = user_name)
+
+
+@app.route('/')
+def index():
+    user = User.query.all()
+    return render_template('index.html', user = user)
 
 @app.route('/signup', methods=['GET','POST'])
 def newSignUp():
@@ -76,6 +83,7 @@ def login():
 
         if user and user.password == password:
             session['username'] = username
+            flash('Logged in')
             return redirect('/newpost')
         elif user and user.password != password:
             flash('Password incorrect')
@@ -89,21 +97,20 @@ def login():
 
     return render_template('login.html')
 
-@app.route('/main')
-def index():
-    return render_template('/index.html')
-
 @app.route('/blog', methods=['POST' , 'GET'])
 def blog():
     error_title = ''
     error_text = ''
-
 
     if request.method == 'POST':
         blog_title = request.form['blog_title']
         blog_text = request.form['blog_text']
 
         owner = User.query.filter_by(username=session['username']).first()
+        if blog_title == '' and blog_text == '':
+            error_title = ' no title'
+            error_text = ' no text'
+            return render_template("newpost.html", error_title = error_title , error_text = error_text)
 
         if blog_title == '':
             error_title = " no title"
