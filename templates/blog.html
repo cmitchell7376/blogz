@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Build a Blog</h1>
 {% for entry in blog_entry %}
-    <h2 style="text-decoration: underline;"><a href="/newpage?id={{entry.id}}" name="title_link">{{entry.title}}</a></h2>
+    <h2 style="text-decoration: underline;"><a href="/blog?id={{entry.id}}">{{entry.title}}</a></h2>
     <p>{{entry.text}}</p>
     <br>
 {% endfor %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>User Posts</h1>
+<ul>
+{% for entry in entries %}
+<li><h2 style="text-decoration: underline;"><a href="/blog?id={{entry.id}}"></a> {{entry.title}}</a></h2> <br>{{entry.text}} </li>
+{% endfor %}
+</ul>
+{% endblock %}

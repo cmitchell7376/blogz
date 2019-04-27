@@ -29,13 +29,11 @@ class User(db.Model):
         self.username = username
         self.password = password
 
-@app.route('/blogger', methods=['GET', 'POST'])
-def blogger():
-    name = request.args.get('user')
-    user_name = User.query.filter_by(username = name).all()
-    
-    return render_template('blogger.html', user_name = user_name)
-
+@app.before_request
+def require_login():
+    allowed_routes = ['index', 'signup', 'login', 'blog']
+    if request.endpoint not in allowed_routes and 'username' not in session:
+        return redirect('/login')
 
 @app.route('/')
 def index():
@@ -99,6 +97,24 @@ def login():
 
 @app.route('/blog', methods=['POST' , 'GET'])
 def blog():
+    id_string = request.args.get('id')
+    user_name = request.args.get('user')
+    if id_string:
+        id_num = int(id_string)
+        blog_id = Blog.query.filter_by(id = id_num).all()
+        return render_template('page.html', titles = blog_id)
+    elif user_name:
+        user_object = User.query.get(user_name)
+        user_id = user_object.id
+        entries = Blog.query.filter_by(owner_id = user.id).all()
+        return render_template('page2.html', entries = entries)
+
+
+    blog_entry = Blog.query.all()
+    return render_template("blog.html", blog_entry = blog_entry) 
+
+@app.route('/newpost')
+def entry():
     error_title = ''
     error_text = ''
 
@@ -126,19 +142,8 @@ def blog():
             db.session.commit()
             list_tmp = Blog.query.all()
             id = str(len(list_tmp)) 
-            return redirect('/newpage?id={0}'.format(id))
+            return redirect('/blog?id={0}'.format(id))
 
-    blog_entry = Blog.query.all()
-    return render_template("blog.html", blog_entry = blog_entry) 
-
-@app.route('/newpage')
-def newpage():
-    id = int(request.args.get('id'))
-    blog_id = Blog.query.filter_by(id = id).all()
-    return render_template('page.html', titles = blog_id)
-
-@app.route('/newpost')
-def entry():
     return render_template("newpost.html")
 
 @app.route('/logout')
