@@ -5,6 +5,7 @@
 <ul>
 {% for entry in entries %}
 <li><h2 style="text-decoration: underline;"><a href="/blog?id={{entry.id}}"></a> {{entry.title}}</a></h2> <br>{{entry.text}} </li>
+<em>writen by</em>
 {% endfor %}
 </ul>
 {% endblock %}

@@ -5,6 +5,6 @@
 {% for entry in blog_entry %}
     <h2 style="text-decoration: underline;"><a href="/blog?id={{entry.id}}">{{entry.title}}</a></h2>
     <p>{{entry.text}}</p>
-    <br>
+    <em>writen by</em>
 {% endfor %}
 {% endblock %}
