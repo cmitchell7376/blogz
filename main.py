@@ -99,21 +99,26 @@ def login():
 def blog():
     id_string = request.args.get('id')
     user_name = request.args.get('user')
+
     if id_string:
         id_num = int(id_string)
+        user_id = User.query.filter_by(id = id_num).all()
         blog_id = Blog.query.filter_by(id = id_num).all()
-        return render_template('page.html', titles = blog_id)
+        return render_template('page.html', titles = blog_id, names = user_id)
+
     elif user_name:
-        user_object = User.query.get(user_name)
-        user_id = user_object.id
-        entries = Blog.query.filter_by(owner_id = user.id).all()
-        return render_template('page2.html', entries = entries)
+        user_object = User.query.filter_by(username = user_name).all()
+        user_id = user_object[0]
+        tmp = user_id.id
+        tmp_1 = User.query.filter_by(id = tmp).all()
+        entries = Blog.query.filter_by(owner_id = tmp).all()
+        return render_template('page2.html', entries = entries, names = tmp_1)
 
-
+    tmp_1 = User.query.filter_by(username = user_name).all()
     blog_entry = Blog.query.all()
-    return render_template("blog.html", blog_entry = blog_entry) 
+    return render_template("blog.html", blog_entry = blog_entry, names = tmp_1) 
 
-@app.route('/newpost')
+@app.route('/newpost', methods=['GET', 'POST'])
 def entry():
     error_title = ''
     error_text = ''
@@ -123,7 +128,7 @@ def entry():
         blog_text = request.form['blog_text']
 
         owner = User.query.filter_by(username=session['username']).first()
-        if blog_title == '' and blog_text == '':
+        if blog_title == '' and blog_text ==  '':
             error_title = ' no title'
             error_text = ' no text'
             return render_template("newpost.html", error_title = error_title , error_text = error_text)
@@ -136,7 +141,6 @@ def entry():
             error_text = " no text"
             return render_template("newpost.html", error_text = error_text , blog_title = blog_title)
         else:
-
             blog_entry = Blog(blog_title,blog_text, owner)
             db.session.add(blog_entry)
             db.session.commit()
