@@ -102,7 +102,10 @@ def blog():
 
     if id_string:
         id_num = int(id_string)
-        user_id = User.query.filter_by(id = id_num).all()
+        blog_list = Blog.query.filter_by(id = id_num).all()
+        blog_object = blog_list[0]
+        own_id = blog_object.owner_id
+        user_id = User.query.filter_by(id = own_id).all()
         blog_id = Blog.query.filter_by(id = id_num).all()
         return render_template('page.html', titles = blog_id, names = user_id)
 
@@ -114,9 +117,9 @@ def blog():
         entries = Blog.query.filter_by(owner_id = tmp).all()
         return render_template('page2.html', entries = entries, names = tmp_1)
 
-    tmp_1 = User.query.filter_by(username = user_name).all()
     blog_entry = Blog.query.all()
-    return render_template("blog.html", blog_entry = blog_entry, names = tmp_1) 
+    user = User.query.all()
+    return render_template("blog.html", blog_entry = blog_entry, names =user) 
 
 @app.route('/newpost', methods=['GET', 'POST'])
 def entry():

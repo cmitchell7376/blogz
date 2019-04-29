@@ -4,12 +4,10 @@
 <h1>User Posts</h1>
 <ul>
 {% for entry in entries %}
-<li><h2 style="text-decoration: underline;"><a href="/blog?id={{entry.id}}"> {{entry.title}}</a></h2> <br>{{entry.text}} </li>
+<li><h2 ><a href="/blog?id={{entry.id}}"> {{entry.title}}</a></h2> <br>{{entry.text}} </li>
+    {% for name in names %}
+    writen by <a href="/blog?user={{name.username}}">{{name.username}}</a>
+    {% endfor %}
 {% endfor %}
-
-{% for name in names %}
-<em>writen by </em><a href="/blog?user={{name.username}}">{{name.username}}</a>
-{% endfor %}
-
 </ul>
 {% endblock %}

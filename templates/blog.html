@@ -4,13 +4,13 @@
 <h1>Build a Blog</h1>
 
 {% for entry in blog_entry %}
-<h2 style="text-decoration: underline;"><a href="/blog?id={{entry.id}}">{{entry.title}}</a></h2>
+<h2><a href="/blog?id={{entry.id}}">{{entry.title}}</a></h2>
 <p>{{entry.text}}</p>
+    {% for name in names %}
+    {% if name.id == entry.owner_id: %}
+    writen by<a href="/blog?user={{name.username}}"> {{name.username}}</a>
+    {% endif %}
+    {% endfor %}
 {% endfor %}
-
-{% for name in names %}
-<em>writen by </em><a href="/blog?user={{name.username}}">{{name.username}}</a>
-{% endfor %}
-
 
 {% endblock %}

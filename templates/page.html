@@ -5,10 +5,10 @@
 {% for title in titles %}
 <h1 class="page-title">{{title.title}}</h1>
 <p class="page-text">{{title.text}}</p>
+    {% for name in names %}
+    writen by<a href="/blog?user={{name.username}}"> {{name.username}}</a>
+    {% endfor %}
 {% endfor %}
 
-{% for name in names %}
-<em>writen by </em><a href="/blog?user={{name.username}}">{{name.username}}</a>
-{% endfor %}
 
 {% endblock %}

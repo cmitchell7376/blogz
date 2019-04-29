@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Blog User!</h1>
+<h1 class="blog_user">Blog User!</h1>
 <ul>
     {% for username in user %}
     <li><a href="/blog?user={{username.username}}">{{username.username}}</a></li>
