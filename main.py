@@ -29,11 +29,6 @@ class User(db.Model):
         self.username = username
         self.password = password
 
-@app.before_request
-def require_login():
-    allowed_routes = ['index', 'signup', 'login', 'blog']
-    if request.endpoint not in allowed_routes and 'username' not in session:
-        return redirect('/login')
 
 @app.route('/')
 def index():
@@ -41,7 +36,7 @@ def index():
     return render_template('index.html', user = user)
 
 @app.route('/signup', methods=['GET','POST'])
-def newSignUp():
+def signup():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -158,6 +153,12 @@ def logout():
     del session['username']
     return redirect("/blog")
 
+
+@app.before_request
+def require_login():
+    allowed_routes = ['index', 'signup', 'login', 'blog', 'static']
+    if not('username' in session or request.endpoint in allowed_routes):
+        return redirect('/login')
 
 if __name__ == '__main__':
     app.run()

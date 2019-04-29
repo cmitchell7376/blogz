@@ -1,3 +1,9 @@
-h1{
-    text-align: center;
+.center{
+    max-width: 200px;
+    margin: auto;
+}
+
+.center2{
+    max-width: 325px;
+    margin: auto;
 }
