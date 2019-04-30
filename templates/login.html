@@ -2,14 +2,15 @@
 
 {% block content %}
 <h1 class="center">Sign In</h1>
-<h2 class="center2">to continue using blog</h2>
+<h2 class="center2">to continue using blogz</h2>
 <br>
 <form class="center2" action="/login" method="post">
     <label style="font-size: 20px;">username<input style="margin-left: 10px;" type="text" name="username" value="{{username}}"/></label>
     <br>
-    <label>password<input type="password" name="password" /></label>
+    <label style="font-size: 20px;">password<input style="margin-left: 11px;" type="password" name="password" /></label>
     <br>
-    <input type="submit" value="Submit" />
+    <br>
+    <input style="margin-left: 90px;" type="submit" value="Submit" />
 </form>
-<p>Dont have an account? <a href="/signup">Create one!</a></p>
+<p class="center2" style="margin-top: 10px">Dont have an account? <a href="/signup">Create one!</a></p>
 {% endblock %}
