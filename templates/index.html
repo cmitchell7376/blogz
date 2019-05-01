@@ -1,10 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="blog_user">Blog User!</h1>
-<ul>
-    {% for username in user %}
-    <li><a href="/blog?user={{username.username}}">{{username.username}}</a></li>
-    {% endfor %}
-</ul>
+<div>
+    <h1 class="center">Blog Users!</h1>
+    <br>
+    <div style="margin-left: 300px;">
+        <ul>
+            {% for username in user %}
+            <li>
+                <a href="/blog?user={{username.username}}">{{username.username}}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
 {% endblock %}
