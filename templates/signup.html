@@ -6,7 +6,7 @@
     <form action="/signup" method="post">
         <label>
             <span class="signup-box">Username</span>
-            <input type="text" name="username" style="margin-bottom: 10px;" class="signin-box" />
+            <input type="text" name="username" style="margin-bottom: 10px;" class="signin-box" value="{{username}}" />
         </label>
         <br>
         <label>
@@ -18,6 +18,11 @@
             <span class="signup-box">Verify password</span>
             <input type="password" name="verify" style="margin-bottom: 10px;" class="signin-box"/>
         </label>
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% for category,message in messages %}
+                <p class="{{category}}">{{message}}</p>
+            {% endfor %}
+        {% endwith %}
         <br>
         <input type="submit" value="Submit" />
     </form>

@@ -12,5 +12,10 @@
         <input type="submit" value="Submit" />
     </form>
     <p>Dont have an account? <a href="/signup" style="text-decoration: underline">Create one!</a></p>
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% for category,message in messages %}
+         <p class="{{category}}">{{message}}</p>
+        {% endfor %}
+    {% endwith %}
 </div>
 {% endblock %}
