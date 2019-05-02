@@ -94,6 +94,9 @@ def login():
         elif user and user.password != password:
             flash('Password incorrect','error')
             return render_template('login.html', username=username)
+        elif username == '' and password == '':
+            flash('No username and No password', 'error')
+            return render_template('login.html')
         elif username == '':
             flash('No username', 'error')
             return render_template('login.html')
