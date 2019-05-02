@@ -47,14 +47,23 @@ def signup():
         password = request.form['password']
         verify = request.form['verify']
 
-        if username == '' or password == '' or verify == '':
-            flash('Either Username or Password left blank')
+        if username == '' and password == '' and verify == '':
+            flash('No username and No password','error')
             return redirect('/signup')
-        elif len(username) < 3 or len(password) < 3:
-            flash('Either Username or Password less than 3 characters long')
+        elif username == '':
+            flash('No username', 'error')
             return redirect('/signup')
+        elif password == '':
+            flash('No password', 'error')
+            return render_template('signup.html', username = username)
+        elif len(username) < 3:
+            flash('Username less than 3 characters long', 'error')
+            return redirect('/signup')
+        elif len(password) < 3:
+            flash('Password less than 3 characters long', 'error')
+            return render_template('signup.html', username = username)
         elif password != verify:
-            flash("Passwords don't match")
+            flash("Passwords don't match", 'error')
             return render_template('signup.html', username = username)
 
         existing_user = User.query.filter_by(username=username).first()
@@ -66,7 +75,7 @@ def signup():
             return redirect('/newpost')
 
         else:
-            flash('User alreday exist')
+            flash('User alreday exist','error')
             return redirect('/signup')
 
     return render_template('signup.html')
@@ -83,11 +92,14 @@ def login():
             session['username'] = username
             return redirect('/newpost')
         elif user and user.password != password:
-            flash('Password incorrect')
+            flash('Password incorrect','error')
             return render_template('login.html', username=username)
-        elif username == '' or password == '':
-            flash('Either username or password left blink')
+        elif username == '':
+            flash('No username', 'error')
             return render_template('login.html')
+        elif password == '':
+            flash('No password','error')
+            return render_template('login.html', username=username)
         else:
                 flash('Username does not exist')
                 return render_template('login.html')
