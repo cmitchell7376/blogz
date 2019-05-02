@@ -2,9 +2,9 @@
 
 {% block content %}
 <div>
-    {% for title in titles %}
-        <h2 class='page1'>{{title.title}}</h2>
-        <p class="page1">{{title.text}}</p>
+    {% for blog in blogs %}
+        <h2 class='page1'>{{blog.title}}</h2>
+        <p class="page1">{{blog.text}}</p>
         {% for name in names %}
             <p class="page1">writen by<a href="/blog?user={{name.username}}"> {{name.username}}</a></p>
         {% endfor %}

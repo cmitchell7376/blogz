@@ -4,6 +4,7 @@
 <div class="sign-up">
     <h1 class="s-title">Sign In</h1>
     <h5>Welcome back! Login to access Blogz</h5>
+    
     <form action="/login" method="post">
         <input type="text" name="username" value="{{username}}" placeholder="Username" style="margin-bottom: 10px;" class="signin-box"/>
         <br>
@@ -12,6 +13,7 @@
         <input type="submit" value="Submit" />
     </form>
     <p>Dont have an account? <a href="/signup" style="text-decoration: underline">Create one!</a></p>
+
     {% with messages = get_flashed_messages(with_categories=True) %}
         {% for category,message in messages %}
          <p class="{{category}}">{{message}}</p>

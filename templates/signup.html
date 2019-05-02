@@ -18,6 +18,7 @@
             <span class="signup-box">Verify password</span>
             <input type="password" name="verify" style="margin-bottom: 10px;" class="signin-box"/>
         </label>
+        
         {% with messages = get_flashed_messages(with_categories=True) %}
             {% for category,message in messages %}
                 <p class="{{category}}">{{message}}</p>
