@@ -1,16 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Build a Blog</h1>
+<div>
+    <h1 class="center">Build a Blog</h1>
+    <div  style="margin-left: 300px;">
+        <ul>
+            {% for entry in blog_entry %}
+                <li>
+                    <h2><a href="/blog?id={{entry.id}}">{{entry.title}}</a></h2>
+                    <p class="blog-body">{{entry.text}}</p>
 
-{% for entry in blog_entry %}
-<h2><a href="/blog?id={{entry.id}}">{{entry.title}}</a></h2>
-<p>{{entry.text}}</p>
-    {% for name in names %}
-    {% if name.id == entry.owner_id: %}
-    writen by<a href="/blog?user={{name.username}}"> {{name.username}}</a>
-    {% endif %}
-    {% endfor %}
-{% endfor %}
+                        {% for name in names %}
+                            {% if name.id == entry.owner_id: %}
+                                <p style="font-size: 13px;">
+                                    writen by<a href="/blog?user={{name.username}}"> {{name.username}}</a>
+                                </p>
+                            {% endif %}
+                        {% endfor %}
+                </li>
 
+            {% endfor %}
+        </ul>
+    </div>
+</div>
 {% endblock %}

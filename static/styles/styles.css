@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .center{
     max-width: 200px;
     margin: auto;
@@ -11,3 +12,97 @@
 a{
     text-align: right;
 }
+=======
+.navbar{
+    overflow: hidden;
+    background-color: white;
+    margin-right: 300px;
+}
+
+.navbar a{
+    float: right;
+    font-size: 16px;
+    color: black;
+    text-align: center;
+    padding: 14px 9px;
+    text-decoration: none;
+}
+
+.dropdown{
+    float: right;
+    overflow: hidden;
+}
+
+.dropdown .dropbtn{
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: black;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+.dropdown-content{
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a{
+    float: none;
+    color: black;
+    padding: 12px 14px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: red;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+  }
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.center{
+    text-align: center;
+}
+
+li{
+    font-size: 20px;
+    padding-top: 9px;
+}
+
+.blog-body{
+    margin-bottom: 10px;
+}
+
+.sign-up{
+    text-align: center;
+    margin-top: 100px;
+}
+
+.s-title{
+    font-size: 35px;
+    margin-bottom: 5px;
+}
+
+.signin-box{
+    padding-inline-end: 60px;
+}
+
+.signup-box{
+    font-size: 18px;
+    margin-right: 10px;
+}
+>>>>>>> beta

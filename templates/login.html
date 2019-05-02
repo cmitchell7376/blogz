@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<<<<<<< HEAD
 <h1 class="center">Sign In</h1>
 <h2 class="center2">to continue using blogz</h2>
 <br>
@@ -13,4 +14,18 @@
     <input style="margin-left: 90px;" type="submit" value="Submit" />
 </form>
 <p class="center2" style="margin-top: 10px">Dont have an account? <a href="/signup">Create one!</a></p>
+=======
+<div class="sign-up">
+    <h1 class="s-title">Sign In</h1>
+    <h5>Welcome back! Login to access Blogz</h5>
+    <form action="/login" method="post">
+        <input type="text" name="username" value="{{username}}" placeholder="Username" style="margin-bottom: 10px;" class="signin-box"/>
+        <br>
+        <input type="password" name="password" placeholder="Password" class="signin-box" style="margin-bottom: 10px;"/>
+        <br>
+        <input type="submit" value="Submit" />
+    </form>
+    <p>Dont have an account? <a href="/signup" style="text-decoration: underline">Create one!</a></p>
+</div>
+>>>>>>> beta
 {% endblock %}
