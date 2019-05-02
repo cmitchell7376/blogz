@@ -29,14 +29,11 @@ class User(db.Model):
         self.username = username
         self.password = password
 
-<<<<<<< HEAD
-=======
 @app.before_request
 def require_login():
     allowed_routes = ['index', 'signup', 'login', 'blog', 'static']
     if request.endpoint not in allowed_routes and 'username' not in session:
         return redirect('/login')
->>>>>>> beta
 
 @app.route('/')
 def index():
