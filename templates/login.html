@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Sign In</h1>
-<h2>to continue using blog</h2>
-<form action="/login" method="post">
-    <label>username<input type="text" name="username" value="{{username}}"/></label>
-    <br>
-    <label>password<input type="password" name="password" /></label>
-    <br>
-    <input type="submit" value="Submit" />
-</form>
-<p>Dont have an account? <a href="/signup" style="text-decoration: underline">Create one!</a></p>
+<div class="sign-up">
+    <h1 class="s-title">Sign In</h1>
+    <h5>Welcome back! Login to access Blogz</h5>
+    <form action="/login" method="post">
+        <input type="text" name="username" value="{{username}}" placeholder="Username" style="margin-bottom: 10px;" class="signin-box"/>
+        <br>
+        <input type="password" name="password" placeholder="Password" class="signin-box" style="margin-bottom: 10px;"/>
+        <br>
+        <input type="submit" value="Submit" />
+    </form>
+    <p>Dont have an account? <a href="/signup" style="text-decoration: underline">Create one!</a></p>
+</div>
 {% endblock %}

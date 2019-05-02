@@ -71,3 +71,22 @@ li{
 .blog-body{
     margin-bottom: 10px;
 }
+
+.sign-up{
+    text-align: center;
+    margin-top: 100px;
+}
+
+.s-title{
+    font-size: 35px;
+    margin-bottom: 5px;
+}
+
+.signin-box{
+    padding-inline-end: 60px;
+}
+
+.signup-box{
+    font-size: 18px;
+    margin-right: 10px;
+}
