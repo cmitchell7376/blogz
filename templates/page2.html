@@ -1,13 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>User Posts</h1>
-<ul>
-{% for entry in entries %}
-<li><h2 ><a href="/blog?id={{entry.id}}"> {{entry.title}}</a></h2> <br>{{entry.text}} </li>
-    {% for name in names %}
-    writen by <a href="/blog?user={{name.username}}">{{name.username}}</a>
-    {% endfor %}
-{% endfor %}
-</ul>
+<div>
+    <h1 class="center">User Posts</h1>
+    <ul>
+        {% for entry in entries %}
+            <li class="page1">
+                <h2 >
+                    <a href="/blog?id={{entry.id}}"> {{entry.title}}</a>
+                </h2> 
+                <br>{{entry.text}} 
+            </li>
+                {% for name in names %}
+                    <p class="page1">writen by <a href="/blog?user={{name.username}}">{{name.username}}</a></p>
+                {% endfor %}
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

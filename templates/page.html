@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-{% for title in titles %}
-<h1 class="page-title">{{title.title}}</h1>
-<p class="page-text">{{title.text}}</p>
-    {% for name in names %}
-    writen by<a href="/blog?user={{name.username}}"> {{name.username}}</a>
+<div>
+    {% for title in titles %}
+        <h2 class='page1'>{{title.title}}</h2>
+        <p class="page1">{{title.text}}</p>
+        {% for name in names %}
+            <p class="page1">writen by<a href="/blog?user={{name.username}}"> {{name.username}}</a></p>
+        {% endfor %}
     {% endfor %}
-{% endfor %}
-
-
+</div>
 {% endblock %}

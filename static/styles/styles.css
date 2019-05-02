@@ -91,6 +91,19 @@ li{
     margin-right: 10px;
 }
 
+.page1{
+    margin-left: 200px;  
+}
+
+.page2{
+    margin-left: 300px;
+}
+
+.texta{
+    padding-inline-end: 165px;
+    padding-bottom: 100px;
+}
+
 .error{
     color: red;
 }
