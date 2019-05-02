@@ -124,12 +124,12 @@ def blog():
         return render_template('page.html', titles = blog_id, names = user_id)
 
     elif user_name:
-        user_object = User.query.filter_by(username = user_name).all()
-        user_id = user_object[0]
-        tmp = user_id.id
-        tmp_1 = User.query.filter_by(id = tmp).all()
-        entries = Blog.query.filter_by(owner_id = tmp).all()
-        return render_template('page2.html', entries = entries, names = tmp_1)
+        user_list = User.query.filter_by(username = user_name).all()
+        user_object = user_list[0]
+        user_id = user_object.id
+        tmp_id = User.query.filter_by(id = user_id).all()
+        entries = Blog.query.filter_by(owner_id = user_id).all()
+        return render_template('page2.html', entries = entries, names = tmp_id)
 
     blog_entry = Blog.query.all()
     user = User.query.all()
