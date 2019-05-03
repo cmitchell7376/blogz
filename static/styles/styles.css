@@ -80,6 +80,7 @@ li{
 .s-title{
     font-size: 35px;
     margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 .signin-box{
@@ -106,4 +107,9 @@ li{
 
 .error{
     color: red;
+}
+
+img{
+    opacity: 0.8;
+    margin-left: 20px;
 }
